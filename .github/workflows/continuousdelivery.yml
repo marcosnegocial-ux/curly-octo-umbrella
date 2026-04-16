@@ -23,6 +23,6 @@ jobs:
     steps:
       - uses: actions/download-artifact@v8
         with:
-          name: arquivozip.zip
+          name: arquivozip
       - name: Display structure of downloaded files
         run: ls -R
