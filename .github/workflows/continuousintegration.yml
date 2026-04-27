@@ -24,21 +24,13 @@ jobs:
           python -m pip install pytest pytest-cov fastapi
           if [ -f requirements.txt ]; then python -m pip install -r requirements.txt; fi
 
-      - name: Verify pytest installation
-        run: python -m pytest --version
+      - name: Run tests
+        env:
+          PYTHONPATH: .
+        run: |
+          python -m pytest test/test.py
 
       - name: Run Linter
         uses: advanced-security/python-lint-code-scanning-action@v1.1.3
         with:
           linter: pylint
-
-      - name: Run tests
-        env:
-          PYTHONPATH: .
-        run: |
-          python -m pytest test/test.py \
-          --doctest-modules \
-          --junitxml=junit/test-results.xml \
-          --cov=src \
-          --cov-report=xml \
-          --cov-report=html
